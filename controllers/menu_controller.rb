@@ -2,11 +2,11 @@ require_relative "../models/address_book"
 
 class MenuController
     attr_accessor :address_book
-    
+
     def initialize
         @address_book = AddressBook.new
     end
-    
+
     def main_menu
         puts "Main Menu - #{@address_book.entries.count} entries"
         puts "1 - View all entries"
@@ -14,8 +14,9 @@ class MenuController
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
         puts "5 - Exit"
+        puts "6 - View Entry Number n"
         print "Enter your selection: "
-        
+
         selection = gets.to_i
         case selection
             when 1
@@ -45,7 +46,7 @@ class MenuController
             main_menu
         end
     end
-    
+
     # #10
     def view_all_entries
         @address_book.entries.each do |entry|
@@ -54,12 +55,12 @@ class MenuController
             # #15
             entry_submenu(entry)
         end
-        
+
         system "clear"
         puts "End of entries"
 
     end
-    
+
     def create_entry
         system "clear"
         puts "New AddressBloc Entry"
@@ -70,30 +71,45 @@ class MenuController
         phone = gets.chomp
         print "Email: "
         email = gets.chomp
-        
+
         # #13
         @address_book.add_entry(name, phone, email)
-        
+
         system "clear"
         puts "New entry created"
     end
-    
+
     def search_entries
     end
-    
+
     def read_csv
     end
-    
+
+    def view_entry_number
+        print "Entry Number: "
+        entry_number = gets.chomp.to_i
+        if entry_number <= @address_book.entries.count
+            puts @address_book.entries[entry_number - 1]
+            puts "Return to main menu"
+            gets.chomp
+            system "clear"
+        else
+            puts "#{entry_number} is not a valid input"
+            view_entry_number
+        end
+    end
+
+
     def entry_submenu(entry)
         # #16
         puts "n - next entry"
         puts "d - delete entry"
         puts "e - edit this entry"
         puts "m - return to main menu"
-        
+
         # #17
         selection = gets.chomp
-        
+
         case selection
             # #18
             when "n"
@@ -110,5 +126,5 @@ class MenuController
             entries_submenu(entry)
         end
     end
-    
+
 end
