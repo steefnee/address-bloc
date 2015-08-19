@@ -8,6 +8,10 @@ class AddressBook
         @entries = []
     end
 
+    def destroy_all_things
+      @entries = []
+    end
+
     def add_entry(name, phone, email)
         index = 0
         @entries.each do |entry|

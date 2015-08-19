@@ -9,7 +9,15 @@ def check_entry(entry, expected_name, expected_number, expected_email)
     expect(entry.email).to eql expected_email
 end
 
+    context "@destroy_all_things" do
+      it "should delete all entries" do
+        book.add_entry('Bob', '111-111-1111', 'bob@email.com')
+        book.add_entry('Jim', '222-222-2222', 'jim@email.com')
 
+        book.destroy_all_things
+        expect(book.entries.size).to eql 0
+      end
+    end
 
     context "attributes" do
 
