@@ -14,7 +14,7 @@ class MenuController
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
         puts "5 - Exit"
-        puts "6 - View Entry Number n"
+        puts "6 - Destroy all the things!"
         print "Enter your selection: "
 
         selection = gets.to_i
@@ -39,6 +39,10 @@ class MenuController
             puts "Good-bye!"
             # #8
             exit(0)
+            when 6
+            puts "Destroy all the things"
+            destroy_all_the_things
+            main_menu
             # #9
             else
             system "clear"
@@ -85,18 +89,10 @@ class MenuController
     def read_csv
     end
 
-    def view_entry_number
-        print "Entry Number: "
-        entry_number = gets.chomp.to_i
-        if entry_number <= @address_book.entries.count
-            puts @address_book.entries[entry_number - 1]
-            puts "Return to main menu"
-            gets.chomp
-            system "clear"
-        else
-            puts "#{entry_number} is not a valid input"
-            view_entry_number
-        end
+    def destroy_all_the_things
+      @address_book.entries.clear
+      system "clear"
+      puts "All things have been destroyed"
     end
 
 
