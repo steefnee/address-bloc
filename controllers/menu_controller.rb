@@ -14,6 +14,7 @@ class MenuController
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
         puts "5 - Exit"
+        puts "6 - View Entry Number n"
         print "Enter your selection: "
         
         selection = gets.to_i
@@ -36,6 +37,10 @@ class MenuController
             main_menu
             when 5
             puts "Good-bye!"
+            when 6
+            system "clear"
+            view_entry_number
+            main_menu
             # #8
             exit(0)
             # #9
@@ -82,6 +87,22 @@ class MenuController
     end
     
     def read_csv
+    end
+    
+    
+    def view_entry_number
+        print "Entry Number: "
+        entry_number = gets.chomp.to_i
+        if entry_number <= @address_book.entries.count
+            puts @address_book.entries[entry_number - 1]
+            puts "Return to main menu"
+            gets.chomp
+            system "clear"
+        else
+            puts "#{entry_number} is not a valid input"
+            view_entry_number
+        end
+        
     end
     
     def entry_submenu(entry)
